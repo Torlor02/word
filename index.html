@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年11月20日浙江省招投标简报 · 可视化看板（V2.0 重新梳理版）</title>
+<style>
+:root { --bg:#f8fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+.container { max-width:1280px; margin:0 auto; padding:24px; }
+header { text-align:center; padding:32px 0 20px; }
+header h1 { font-size:1.9rem; font-weight:800; letter-spacing:-0.02em; }
+header p { color:var(--muted); margin-top:8px; font-size:.9rem; }
+.notice { max-width:1100px; margin:0 auto 6px; background:#fef2f2; border:1px solid #fca5a5; border-radius:12px; padding:12px 18px; font-size:.84rem; color:#991b1b; line-height:1.7; }
+.notice b { color:#b91c1c; }
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:20px 0 28px; }
+.stat { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; text-align:center; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.stat .num { font-size:1.7rem; font-weight:800; }
+.stat .label { color:var(--muted); font-size:.82rem; margin-top:4px; }
+.section { margin:34px 0; }
+.section-title { display:flex; align-items:center; gap:10px; font-size:1.18rem; font-weight:700; margin-bottom:14px; padding-left:12px; border-left:5px solid; }
+.section.unopened .section-title { border-color:#f59e0b; }
+.section.opened .section-title { border-color:#10b981; }
+.section.other .section-title { border-color:#3b82f6; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(370px,1fr)); gap:18px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,.04); transition:transform .15s, box-shadow .15s; }
+.card.clickable { cursor:pointer; }
+.card.clickable:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,.10); }
+.card-head { padding:15px 18px 12px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.card-head h3 { font-size:.98rem; font-weight:700; line-height:1.5; flex:1; }
+.badge { display:inline-block; padding:4px 12px; border-radius:999px; font-size:.76rem; font-weight:700; white-space:nowrap; color:#fff; }
+.card-body { padding:14px 18px 18px; }
+.meta { display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; margin-bottom:10px; }
+.meta-item { font-size:.84rem; color:#334155; }
+.meta-item span { display:block; color:var(--muted); font-size:.72rem; margin-bottom:1px; }
+.desc { font-size:.84rem; color:#475569; margin:8px 0; }
+.reason-box { margin-top:10px; padding:11px 13px; border-radius:10px; background:#f1f5f9; border:1px solid #cbd5e1; }
+.reason-box .rlabel { font-size:.72rem; font-weight:700; color:#475569; margin-bottom:4px; }
+.reason-box .rtext { font-size:.83rem; color:#334155; }
+.deadline-flag { display:inline-block; margin-top:8px; font-size:.78rem; font-weight:700; color:#b45309; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:3px 10px; }
+.view-link { margin-top:10px; font-size:.8rem; color:#2563eb; }
+.link { display:inline-flex; align-items:center; gap:4px; font-size:.8rem; color:#2563eb; text-decoration:none; margin-top:8px; padding:6px 12px; border:1px solid #bfdbfe; border-radius:8px; background:#f0f9ff; transition:background .15s; }
+.link:hover { background:#e0f2fe; text-decoration:none; }
+.source-link { display:inline-flex; align-items:center; gap:4px; font-size:.78rem; color:#2563eb; text-decoration:none; margin-top:10px; padding:6px 12px; border:1px solid #bfdbfe; border-radius:8px; background:#fff; transition:background .15s; }
+.source-link:hover { background:#eff6ff; text-decoration:none; }
+.source-link::before { content:"\1F517"; font-size:.75rem; }
+.card-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; align-items:center; }
+.empty { color:var(--muted); font-size:.88rem; padding:14px 18px; background:#fff; border:1px dashed var(--border); border-radius:14px; }
+footer { text-align:center; color:var(--muted); font-size:.8rem; padding:26px 0 10px; }
+#detail-view { display:none; }
+.detail-top { display:flex; align-items:center; gap:14px; margin:22px 0 6px; }
+.back-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:10px; border:1px solid var(--border); background:#fff; color:#334155; font-size:.85rem; cursor:pointer; transition:background .15s; }
+.back-btn:hover { background:#f1f5f9; }
+.detail-hero { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:24px 28px; margin-top:14px; box-shadow:0 4px 12px rgba(0,0,0,.04); }
+.detail-hero h2 { font-size:1.3rem; font-weight:800; line-height:1.5; margin-bottom:6px; }
+.detail-hero .sub { color:var(--muted); font-size:.86rem; }
+.detail-hero .dbadge { display:inline-block; margin-top:12px; padding:5px 14px; border-radius:999px; font-size:.8rem; font-weight:700; color:#fff; }
+.detail-group { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:20px 24px; margin-top:16px; box-shadow:0 2px 8px rgba(0,0,0,.03); }
+.detail-group h3 { font-size:1.02rem; font-weight:700; margin-bottom:14px; padding-left:10px; border-left:4px solid #94a3b8; }
+.kv-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px 20px; }
+.kv { background:#f8fafc; border-radius:10px; padding:10px 14px; }
+.kv .k { font-size:.74rem; color:var(--muted); margin-bottom:3px; }
+.kv .v { font-size:.86rem; color:#1e293b; word-break:break-all; }
+.kv.wide { grid-column:1/-1; }
+.analysis-block { background:#f8fafc; border-radius:12px; padding:14px 18px; margin-bottom:12px; }
+.analysis-block .ab-title { font-size:.86rem; font-weight:700; color:#0f172a; margin-bottom:6px; }
+.analysis-block .ab-body { font-size:.85rem; color:#334155; line-height:1.8; }
+.dfeas { background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 16px; margin-bottom:10px; }
+.dfeas .df-b { font-size:.85rem; color:#334155; line-height:1.8; }
+@media (max-width:768px) { .stats { grid-template-columns:1fr 1fr; } .grid { grid-template-columns:1fr; } .kv-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="main-view">
+  <header>
+    <h1>2026年11月20日浙江省招投标简报</h1>
+    <p>可视化看板（V2.0 重新梳理版）｜ 检索窗口 2026-11-13 15:30 —— 2026-11-20 15:30（按公告发布时间）｜ 投标主体视角：杭州原数科技有限公司</p>
+  </header>
+  <div class="stats">
+    <div class="stat"><div class="num">8</div><div class="label">本周收录项目</div></div>
+    <div class="stat"><div class="num" style="color:#d97706;">4</div><div class="label">未开标（可投）</div></div>
+    <div class="stat"><div class="num" style="color:#10b981;">3</div><div class="label">已开标</div></div>
+    <div class="stat"><div class="num" style="color:#94a3b8;">0</div><div class="label">建议主投（谨慎 1 · 放弃 2 · 待分析 1）</div></div>
+  </div>
+
+  <section class="section unopened">
+    <h2 class="section-title">未开标项目可行性研判（共 4 条 · 主投 → 谨慎 → 放弃 → 待分析，同结论按截止时间排序）</h2>
+    <div class="grid">
+<div class="card clickable" onclick="showDetail(0)">
+  <div class="card-head" style="background:#f1f5f9;">
+    <h3>浙江自然博物院2027-2028安吉馆安防维保服务项</h3>
+    <span class="badge" style="background:#d97706;">谨慎</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">
+      <div class="meta-item"><span>招标单位</span>浙江自然博物院</div>
+      <div class="meta-item"><span>预算金额</span>28 万元</div>
+      <div class="meta-item"><span>报名/获取文件截止</span>2026-11-26（获取文件截止）</div>
+      <div class="meta-item"><span>开标时间</span>2026-11-26 09:30</div>
+    </div>
+    <div class="deadline-flag">⏰ 🟡 剩 6 天</div>
+    <p class="desc">2027-2028 安吉馆安防维保服务（竞争性磋商，履约 2027-01 至 2028-06）</p>
+    <div class="reason-box"><div class="rlabel">💡 决策结论 · 谨慎</div><div class="rtext">门槛低（无特定资质）、预算小、且与浙江自然博物院有多次合作基础，可作为维护客户的关系标；但安防设备维保非原数强项、不接受联合体、履约期长，须拿到采购文件核实维保清单与评分办法后再决定是否实质投入。</div></div>
+    <div class="card-actions">
+      <span class="badge" style="background:#0ea5e9;">资质符合性 0.7</span>
+      <span class="view-link">点击查看完整评估 →</span>
+      <a class="source-link" href="https://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202611/t20261117_27702487.htm" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a>
+    </div>
+  </div>
+</div>
+<div class="card clickable" onclick="showDetail(1)">
+  <div class="card-head" style="background:#f1f5f9;">
+    <h3>2027年南湖区不可移动文物安全风险评估项目服务（第二期）</h3>
+    <span class="badge" style="background:#dc2626;">放弃</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">
+      <div class="meta-item"><span>招标单位</span>嘉兴市南湖区文化和旅游局</div>
+      <div class="meta-item"><span>预算金额</span>28 万元</div>
+      <div class="meta-item"><span>报名/获取文件截止</span>2026-11-20 17:00（报名截止）</div>
+      <div class="meta-item"><span>开标时间</span>—（以采购人通知为准）</div>
+    </div>
+    <div class="deadline-flag">⏰ 🔴 剩 0 天</div>
+    <p class="desc">58 处不可移动文物安全风险评估，对接浙政钉应用建立文物安全体检数据库，形成“体检—预警—研判—处置”模式，编制体检报告与整治“四项清单”（自行采购公开比选，不接受联合体，需至南湖区第二行政中心现场报名）</p>
+    <div class="reason-box"><div class="rlabel">💡 决策结论 · 放弃</div><div class="rtext">报名截止 2026-11-20 17:00 已过，错过报名时间，无法取得比选文件，改判放弃（洁莹姐 2026-11-20 人工确认）。</div></div>
+    <div class="card-actions">
+      
+      <span class="view-link">点击查看完整评估 →</span>
+      <a class="source-link" href="https://www.nanhu.gov.cn/col/col1229282713/art/2026/art_cf5b2ed89ed7473d82bc0e313738915f.html" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a>
+    </div>
+  </div>
+</div>
+<div class="card clickable" onclick="showDetail(2)">
+  <div class="card-head" style="background:#f1f5f9;">
+    <h3>遂昌县黄沙腰镇李氏大屋（含李氏宗祠）建筑彩画与彩绘文化研究及数字化测绘服务项目</h3>
+    <span class="badge" style="background:#dc2626;">放弃</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">
+      <div class="meta-item"><span>招标单位</span>遂昌县黄沙腰镇黄沙腰村集体经济组织</div>
+      <div class="meta-item"><span>预算金额</span>21 万元</div>
+      <div class="meta-item"><span>报名/获取文件截止</span>2026-11-30（报名/获取文件截止·邮件报名）</div>
+      <div class="meta-item"><span>开标时间</span>2026-11-30 14:30</div>
+    </div>
+    <div class="deadline-flag">⏰ 剩 10 天</div>
+    <p class="desc">李氏大屋（含李氏宗祠）建筑彩画与彩绘文化研究及数字化测绘（竞争性磋商，测绘乙级[工程测量/摄影测量与遥感]或文保勘察设计乙级；接受联合体，须覆盖三维扫描测绘与建筑文化研究双能力）</p>
+    <div class="reason-box"><div class="rlabel">💡 决策结论 · 放弃</div><div class="rtext">无特定资质：项目要求测绘乙级（工程测量/摄影测量与遥感）或文保勘察设计乙级资质，原数无此资质，改判放弃（洁莹姐 2026-11-20 人工确认）。</div></div>
+    <div class="card-actions">
+      
+      <span class="view-link">点击查看完整评估 →</span>
+      <a class="source-link" href="http://lssggzy.lishui.gov.cn/col/col1229662146/art/2026/art_98e93106337748709c377ef0af9e34fe.html" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a>
+    </div>
+  </div>
+</div>
+<div class="card clickable" onclick="showDetail(3)">
+  <div class="card-head" style="background:#f1f5f9;">
+    <h3>《红楼梦》文物数字艺术展项目（暂定名）</h3>
+    <span class="badge" style="background:#64748b;">待分析</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">
+      <div class="meta-item"><span>招标单位</span>平湖市博物馆</div>
+      <div class="meta-item"><span>预算金额</span>85 万元</div>
+      <div class="meta-item"><span>报名/获取文件截止</span>2026-11-27（获取文件截止，政采云线上）</div>
+      <div class="meta-item"><span>开标时间</span>2026-11-27 14:00</div>
+    </div>
+    <div class="deadline-flag">⏰ 🟡 剩 7 天</div>
+    <p class="desc">《红楼梦》文物数字艺术展（暂定名）实施（竞争性磋商，预算=最高限价 85 万，专门面向中小企业，不接受联合体，履约 2026-12-01 至 2027-03-30 暂定）</p>
+    <div class="reason-box"><div class="rlabel">💡 决策结论 · 待分析</div><div class="rtext">今日 16:00 评估表未收录本项目，待补充研判（未编造结论）。</div></div>
+    <div class="card-actions">
+      
+      <span class="view-link">点击查看完整评估 →</span>
+      <a class="source-link" href="http://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202611/t20261118_27706952.htm" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a>
+    </div>
+  </div>
+</div></div>
+  </section>
+
+  <section class="section opened">
+    <h2 class="section-title">已开标项目（共 3 条）</h2>
+    <div class="grid">
+<div class="card">
+  <div class="card-head" style="background:#d1fae5;">
+    <h3>杭州市园林文物局系列展览&quot;博物馆之城&quot;杭州的博物馆数智化应用征集活动</h3>
+    <span class="badge" style="background:#10b981;">已开标</span>
+  </div>
+  <div class="card-body">
+    <div class="meta"><div class="meta-item"><span>中标单位</span>杭州心知晓科技有限公司（第一成交候选人）</div><div class="meta-item"><span>中标金额（万元）</span>29.6</div><div class="meta-item"><span>招标单位</span>杭州市上城区文物保护中心</div><div class="meta-item"><span>开标日期</span>—（已评审·候选公示）</div></div>
+    <p class="desc">&quot;博物馆之城&quot;杭州的博物馆数智化应用征集（成交候选人公示，工期至 2026-12-01）</p>
+    <div class="card-actions"><a class="source-link" href="https://www.hzsc.gov.cn/col/col1229545543/art/2026/art_5d7ec1dc5a354adc8c9ae56cea6da61a.html" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-head" style="background:#d1fae5;">
+    <h3>岳庙管理处语音导览项目运营及设备运维服务发包项目</h3>
+    <span class="badge" style="background:#10b981;">已开标</span>
+  </div>
+  <div class="card-body">
+    <div class="meta"><div class="meta-item"><span>中标单位</span>天津恒达文博科技股份有限公司杭州分公司</div><div class="meta-item"><span>中标金额（万元）</span>—（分成60%）</div><div class="meta-item"><span>招标单位</span>杭州西湖风景名胜区岳庙管理处（连横纪念馆）</div><div class="meta-item"><span>开标日期</span>2026-11-18（定标）</div></div>
+    <p class="desc">语音导览项目运营及设备运维服务发包（比选成交；分成比例 60%，服务期 5 年）</p>
+    <div class="card-actions"><a class="source-link" href="https://westlake.hangzhou.gov.cn/col/col1229486198/art/2026/art_a8cdc752b44f4c5a8d20754711034b4c.html" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-head" style="background:#d1fae5;">
+    <h3>韩美林文物库房恒温恒湿机、文物展柜采购项目</h3>
+    <span class="badge" style="background:#10b981;">已开标</span>
+  </div>
+  <div class="card-body">
+    <div class="meta"><div class="meta-item"><span>中标单位</span>杭州汉克展览科技有限公司（第一成交候选人，最终以正式合同为准）</div><div class="meta-item"><span>中标金额（万元）</span>23</div><div class="meta-item"><span>招标单位</span>韩美林艺术馆</div><div class="meta-item"><span>开标日期</span>2026-11-18（评审）</div></div>
+    <p class="desc">文物库房恒温恒湿机与文物展柜采购（比选公告 11-09 发布，11-18 评审）</p>
+    <div class="card-actions"><a class="source-link" href="https://westlake.hangzhou.gov.cn/col/col1229486198/art/2026/art_34ffd755b12e4479bb4b19dcea09598c.html" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a></div>
+  </div>
+</div></div>
+  </section>
+
+  <section class="section other">
+    <h2 class="section-title">其他 · 合同公告与履约验收（共 1 条，含终止公告）</h2>
+    <div class="grid">
+<div class="card">
+  <div class="card-head" style="background:#dbeafe;">
+    <h3>三门县博物馆馆藏文物预防性保护项目【终止公告】</h3>
+    <span class="badge" style="background:#94a3b8;">已终止</span>
+  </div>
+  <div class="card-body">
+    <div class="meta"><div class="meta-item"><span>招标单位</span>三门县博物馆（亭旁起义纪念馆）</div><div class="meta-item"><span>金额（万元）</span>118.0（原预算）</div><div class="meta-item"><span>发布日期</span>2026-11-19 17:17（终止公告）</div><div class="meta-item"><span>项目编号</span>331022262060040000004-三招采-2026-GK113</div></div>
+    <p class="desc">馆藏文物预防性保护项目因故终止招标（10-26 首发标、11-17 暂停、11-19 正式终止；上周简报在投项目本周终止。建议联系采购人谢优君 13806575153 或代理机构三门县金鳞工程管理有限责任公司了解终止原因与重招计划）</p>
+    <div class="card-actions"><a class="source-link" href="http://www.ccgp.gov.cn/cggg/dfgg/fblbgg/202611/t20261119_27718233.htm" target="_blank" onclick="event.stopPropagation();">查看公告原文 →</a></div>
+  </div>
+</div></div>
+  </section>
+
+  <footer>Generated by WorkBuddy · 浙江省文博招投标周报自动化 ｜ 投标主体：杭州原数科技有限公司 ｜ 数据基准日 2026-11-20 17:14（V2.0 重新梳理版）｜ 南湖区项目经洁莹姐人工改判放弃 ｜ 已过截止 2 条按定版口径未纳入看板</footer>
+</div>
+
+<div id="detail-view">
+  
+<div class="detail-page" id="dp-0" style="display:none;">
+  <div class="detail-top"><button class="back-btn" onclick="backToList()">← 返回列表</button></div>
+  <div class="detail-hero">
+    <h2>浙江自然博物院2027-2028安吉馆安防维保服务项</h2>
+    <div class="sub">招标单位：浙江自然博物院 ｜ 预算：28 万元 ｜ 资质符合性：0.7（满分 1.0） ｜ 评估来源：本期评估（2026-11-20）</div>
+    <span class="dbadge" style="background:#d97706;">谨慎</span>
+    <div class="deadline-flag" style="margin-top:14px;">⏰ 截止预警：🟡 剩 6 天</div>
+    <a class="link" href="https://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202611/t20261117_27702487.htm" target="_blank" style="margin-left:14px;">查看公告原文 →</a>
+  </div>
+
+  <div class="detail-group">
+    <h3>📋 基本信息</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">招标编号</div><div class="v">330000263200100000336-ZJTY2026M-JF-063</div></div><div class="kv"><div class="k">招标单位</div><div class="v">浙江自然博物院</div></div><div class="kv"><div class="k">项目金额(万元)</div><div class="v">28</div></div><div class="kv"><div class="k">项目具体地点</div><div class="v">湖州市安吉县</div></div><div class="kv"><div class="k">发布日期</div><div class="v">2026-11-17</div></div><div class="kv"><div class="k">报名截止日期</div><div class="v">2026-11-26（获取文件截止）</div></div><div class="kv"><div class="k">标书购买费用（元）</div><div class="v">0</div></div><div class="kv"><div class="k">投标保证金（元）</div><div class="v">—</div></div><div class="kv"><div class="k">开标方式</div><div class="v">竞争性磋商</div></div><div class="kv"><div class="k">开标日期</div><div class="v">2026-11-26 09:30</div></div><div class="kv"><div class="k">关键词</div><div class="v">预防性保护/安防运维/安吉馆</div></div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>🔍 评估分析</h3>
+    <div class="analysis-block"><div class="ab-title">资质要求评估</div><div class="ab-body">①主题归类：预防性保护——安防设备运维（履约2027-01至2028-06，数量18个月）。②资质符合性【部分符合】：本项目无特定资质要求，专门面向中小企业（须提供中小企业声明函）。原数为软件/高新技术企业，ISO27001范围含博物馆预防性保护系统（净化恒湿/恒温恒湿/恒湿柜/智能展柜），但安防维保（监控/报警/门禁）与原数强项&quot;环境监测调控&quot;并非同一技术线；中小企业资格需洁莹姐确认并出具声明函。</div></div><div class="analysis-block"><div class="ab-title">商务条款评估</div><div class="ab-body">预算28万（18个月），售价0元；不接受联合体——须原数独立承接；专门面向中小企业（硬门槛：非中小企业不得参加）。履约跨18个月，维保响应与时限成本需核算。无付款/保证金明细，以采购文件为准。</div></div><div class="analysis-block"><div class="ab-title">技术要求评估</div><div class="ab-body">③业绩匹配【偏弱】：画像第四节预防性保护业绩（台州363万、温州260万、萧山505万等）均为&quot;监测+调控+囊匣+展柜&quot;系统建设，非安防设备维保；原数无&quot;安防（监控/报警）运维&quot;同类中标业绩。④技术要求：安吉馆安防系统日常维保，偏硬件设备巡检与响应，非原数软件系统集成主业。</div></div><div class="analysis-block"><div class="ab-title">成本及风险分析</div><div class="ab-body">⑤竞争对手：本地安防集成/维保商及文博安防专业公司（参考上周岳庙语音导览由天津恒达文博杭州分公司成交）；原数在纯安防设备维保无交锋优势。⑥人员匹配：需安防/电工值守人员，原数仅中级电工郑镜宇1人，社保支撑待核。成本/风险：18个月驻场/响应跨省（安吉）履约成本或侵蚀利润。</div></div><div class="analysis-block"><div class="ab-title">投标准备时间评估</div><div class="ab-body">公告11-17发布，11-26获取文件截止+磋商，准备期约9天。需先确认中小企业声明函与政采云CA有效性；建议获取采购文件核实评分办法与维保清单后再定是否实质响应。</div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>📊 量化指标</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">资质要求符合性（满分 1.0）</div><div class="v">0.7</div></div><div class="kv"><div class="k">商务得分 · 客观分说明</div><div class="v">公告未公示评标办法，采购文件需政采云登录获取、无公开直链；客观分暂无法锁定（初步，需正式评标办法）</div></div><div class="kv"><div class="k">技术得分（主观项·不显示）</div><div class="v">—（主观项·不显示）</div></div><div class="kv"><div class="k">报价得分（价格分不列示）</div><div class="v">—（价格分按公式计算，不列示）</div></div><div class="kv"><div class="k">预估总得分</div><div class="v">—（主观分+价格分不可预估）</div></div><div class="kv"><div class="k">成本预估总额（万元）</div><div class="v">—（缺成本基线）</div></div><div class="kv"><div class="k">预期毛利率（%）</div><div class="v">—（缺成本基线）</div></div></div>
+    <div style="margin-top:12px; font-size:.8rem; color:var(--muted);">说明：评分办法未公示项与主观项统一显示「—」，未编造任何数字。</div>
+  </div>
+
+  <div class="detail-group">
+    <h3>⚠️ 结论与风险</h3>
+    <div class="dfeas"><div class="df-b"><b>核心风险点：</b>中小企业声明函为硬门槛（须确认资格）；不接受联合体需独立履约；安防设备维保非原数核心能力、缺同类业绩，18个月异地维保成本偏高。评分项匹配：公告未公示评标办法，需获取采购文件后补充，未编造。</div></div>
+    <div class="kv-grid">
+      <div class="kv wide"><div class="k">最终评估结果（本期评估（2026-11-20））</div><div class="v"><span class="badge" style="background:#d97706;">谨慎</span></div></div>
+      <div class="kv wide"><div class="k">决策理由</div><div class="v">门槛低（无特定资质）、预算小、且与浙江自然博物院有多次合作基础，可作为维护客户的关系标；但安防设备维保非原数强项、不接受联合体、履约期长，须拿到采购文件核实维保清单与评分办法后再决定是否实质投入。</div></div>
+      <div class="kv wide"><div class="k">备注</div><div class="v">初步研判，需人工复核。先确认中小企业资格与声明函；若采购文件显示维保含大量原数弱势的安防硬件，则下调为放弃。</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:20px 0;">
+    <button class="back-btn" onclick="backToList()">← 返回列表</button>
+  </div>
+</div>
+<div class="detail-page" id="dp-1" style="display:none;">
+  <div class="detail-top"><button class="back-btn" onclick="backToList()">← 返回列表</button></div>
+  <div class="detail-hero">
+    <h2>2027年南湖区不可移动文物安全风险评估项目服务（第二期）</h2>
+    <div class="sub">招标单位：嘉兴市南湖区文化和旅游局 ｜ 预算：28 万元 ｜ 资质符合性：— ｜ 评估来源：人工改判（2026-11-20 洁莹姐确认）</div>
+    <span class="dbadge" style="background:#dc2626;">放弃</span>
+    <div class="deadline-flag" style="margin-top:14px;">⏰ 截止预警：🔴 剩 0 天</div>
+    <a class="link" href="https://www.nanhu.gov.cn/col/col1229282713/art/2026/art_cf5b2ed89ed7473d82bc0e313738915f.html" target="_blank" style="margin-left:14px;">查看公告原文 →</a>
+  </div>
+
+  <div class="detail-group">
+    <h3>📋 基本信息</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">招标编号</div><div class="v">—（公告未载编号·自行采购公开比选）</div></div><div class="kv"><div class="k">招标单位</div><div class="v">嘉兴市南湖区文化和旅游局</div></div><div class="kv"><div class="k">项目金额(万元)</div><div class="v">28</div></div><div class="kv"><div class="k">项目具体地点</div><div class="v">嘉兴市南湖区（58 处不可移动文物）</div></div><div class="kv"><div class="k">发布日期</div><div class="v">2026-11-17 17:12</div></div><div class="kv"><div class="k">报名截止日期</div><div class="v">2026-11-20 17:00（报名截止）</div></div><div class="kv"><div class="k">标书购买费用（元）</div><div class="v">—</div></div><div class="kv"><div class="k">投标保证金（元）</div><div class="v">—</div></div><div class="kv"><div class="k">开标方式</div><div class="v">公开比选（自行采购）</div></div><div class="kv"><div class="k">开标日期</div><div class="v">—（以采购人通知为准）</div></div><div class="kv"><div class="k">关键词</div><div class="v">预防性保护/文物安全风险评估/安全体检数据库</div></div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>🔍 评估分析</h3>
+    <div class="analysis-block"><div class="ab-title">评估状态</div><div class="ab-body">今日 16:00 评估表未收录本项目（V2.0 简报新增），暂无评估分析，待补充研判后更新。</div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>📊 量化指标</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">资质要求符合性（满分 1.0）</div><div class="v">—</div></div><div class="kv"><div class="k">商务得分 · 客观分说明</div><div class="v">—</div></div><div class="kv"><div class="k">技术得分（主观项·不显示）</div><div class="v">—</div></div><div class="kv"><div class="k">报价得分（价格分不列示）</div><div class="v">—</div></div><div class="kv"><div class="k">预估总得分</div><div class="v">—</div></div><div class="kv"><div class="k">成本预估总额（万元）</div><div class="v">—</div></div><div class="kv"><div class="k">预期毛利率（%）</div><div class="v">—</div></div></div>
+    <div style="margin-top:12px; font-size:.8rem; color:var(--muted);">说明：评分办法未公示项与主观项统一显示「—」，未编造任何数字。</div>
+  </div>
+
+  <div class="detail-group">
+    <h3>⚠️ 结论与风险</h3>
+    <div class="dfeas"><div class="df-b"><b>核心风险点：</b>报名窗口已关闭，本期无法参与；该项目为文物安全风险评估服务（数字化体检数据库方向），如采购人后续重招或发布第三期，可提前跟踪。</div></div>
+    <div class="kv-grid">
+      <div class="kv wide"><div class="k">最终评估结果（人工改判（2026-11-20 洁莹姐确认））</div><div class="v"><span class="badge" style="background:#dc2626;">放弃</span></div></div>
+      <div class="kv wide"><div class="k">决策理由</div><div class="v">报名截止 2026-11-20 17:00 已过，错过报名时间，无法取得比选文件，改判放弃（洁莹姐 2026-11-20 人工确认）。</div></div>
+      <div class="kv wide"><div class="k">备注</div><div class="v">—</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:20px 0;">
+    <button class="back-btn" onclick="backToList()">← 返回列表</button>
+  </div>
+</div>
+<div class="detail-page" id="dp-2" style="display:none;">
+  <div class="detail-top"><button class="back-btn" onclick="backToList()">← 返回列表</button></div>
+  <div class="detail-hero">
+    <h2>遂昌县黄沙腰镇李氏大屋（含李氏宗祠）建筑彩画与彩绘文化研究及数字化测绘服务项目</h2>
+    <div class="sub">招标单位：遂昌县黄沙腰镇黄沙腰村集体经济组织 ｜ 预算：21 万元 ｜ 资质符合性：— ｜ 评估来源：人工改判（2026-11-20 洁莹姐确认）</div>
+    <span class="dbadge" style="background:#dc2626;">放弃</span>
+    <div class="deadline-flag" style="margin-top:14px;">⏰ 截止预警：剩 10 天</div>
+    <a class="link" href="http://lssggzy.lishui.gov.cn/col/col1229662146/art/2026/art_98e93106337748709c377ef0af9e34fe.html" target="_blank" style="margin-left:14px;">查看公告原文 →</a>
+  </div>
+
+  <div class="detail-group">
+    <h3>📋 基本信息</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">招标编号</div><div class="v">SCYH【2026】174-磋72</div></div><div class="kv"><div class="k">招标单位</div><div class="v">遂昌县黄沙腰镇黄沙腰村集体经济组织</div></div><div class="kv"><div class="k">项目金额(万元)</div><div class="v">21</div></div><div class="kv"><div class="k">项目具体地点</div><div class="v">丽水市遂昌县黄沙腰镇</div></div><div class="kv"><div class="k">发布日期</div><div class="v">2026-11-19</div></div><div class="kv"><div class="k">报名截止日期</div><div class="v">2026-11-30（报名/获取文件截止·邮件报名）</div></div><div class="kv"><div class="k">标书购买费用（元）</div><div class="v">0</div></div><div class="kv"><div class="k">投标保证金（元）</div><div class="v">—</div></div><div class="kv"><div class="k">开标方式</div><div class="v">竞争性磋商</div></div><div class="kv"><div class="k">开标日期</div><div class="v">2026-11-30 14:30</div></div><div class="kv"><div class="k">关键词</div><div class="v">数字化保护/数字化测绘/建筑彩画研究</div></div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>🔍 评估分析</h3>
+    <div class="analysis-block"><div class="ab-title">评估状态</div><div class="ab-body">今日 16:00 评估表未收录本项目（V2.0 简报新增），暂无评估分析，待补充研判后更新。</div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>📊 量化指标</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">资质要求符合性（满分 1.0）</div><div class="v">—</div></div><div class="kv"><div class="k">商务得分 · 客观分说明</div><div class="v">—</div></div><div class="kv"><div class="k">技术得分（主观项·不显示）</div><div class="v">—</div></div><div class="kv"><div class="k">报价得分（价格分不列示）</div><div class="v">—</div></div><div class="kv"><div class="k">预估总得分</div><div class="v">—</div></div><div class="kv"><div class="k">成本预估总额（万元）</div><div class="v">—</div></div><div class="kv"><div class="k">预期毛利率（%）</div><div class="v">—</div></div></div>
+    <div style="margin-top:12px; font-size:.8rem; color:var(--muted);">说明：评分办法未公示项与主观项统一显示「—」，未编造任何数字。</div>
+  </div>
+
+  <div class="detail-group">
+    <h3>⚠️ 结论与风险</h3>
+    <div class="dfeas"><div class="df-b"><b>核心风险点：</b>资质门槛（测绘乙级/文保勘察设计乙级）为硬性要求，本项目无法独立参与；公告虽接受联合体，但三维扫描测绘与建筑文化研究双能力均需合作方覆盖，投入产出不匹配。</div></div>
+    <div class="kv-grid">
+      <div class="kv wide"><div class="k">最终评估结果（人工改判（2026-11-20 洁莹姐确认））</div><div class="v"><span class="badge" style="background:#dc2626;">放弃</span></div></div>
+      <div class="kv wide"><div class="k">决策理由</div><div class="v">无特定资质：项目要求测绘乙级（工程测量/摄影测量与遥感）或文保勘察设计乙级资质，原数无此资质，改判放弃（洁莹姐 2026-11-20 人工确认）。</div></div>
+      <div class="kv wide"><div class="k">备注</div><div class="v">—</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:20px 0;">
+    <button class="back-btn" onclick="backToList()">← 返回列表</button>
+  </div>
+</div>
+<div class="detail-page" id="dp-3" style="display:none;">
+  <div class="detail-top"><button class="back-btn" onclick="backToList()">← 返回列表</button></div>
+  <div class="detail-hero">
+    <h2>《红楼梦》文物数字艺术展项目（暂定名）</h2>
+    <div class="sub">招标单位：平湖市博物馆 ｜ 预算：85 万元 ｜ 资质符合性：— ｜ 评估来源：待分析</div>
+    <span class="dbadge" style="background:#64748b;">待分析</span>
+    <div class="deadline-flag" style="margin-top:14px;">⏰ 截止预警：🟡 剩 7 天</div>
+    <a class="link" href="http://www.ccgp.gov.cn/cggg/dfgg/jzxcs/202611/t20261118_27706952.htm" target="_blank" style="margin-left:14px;">查看公告原文 →</a>
+  </div>
+
+  <div class="detail-group">
+    <h3>📋 基本信息</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">招标编号</div><div class="v">330482261410030000029-银建（平）采磋2026-58（1）</div></div><div class="kv"><div class="k">招标单位</div><div class="v">平湖市博物馆</div></div><div class="kv"><div class="k">项目金额(万元)</div><div class="v">85</div></div><div class="kv"><div class="k">项目具体地点</div><div class="v">嘉兴平湖市（一层第二展厅 900㎡）</div></div><div class="kv"><div class="k">发布日期</div><div class="v">2026-11-18 15:23</div></div><div class="kv"><div class="k">报名截止日期</div><div class="v">2026-11-27（获取文件截止，政采云线上）</div></div><div class="kv"><div class="k">标书购买费用（元）</div><div class="v">0</div></div><div class="kv"><div class="k">投标保证金（元）</div><div class="v">—</div></div><div class="kv"><div class="k">开标方式</div><div class="v">竞争性磋商</div></div><div class="kv"><div class="k">开标日期</div><div class="v">2026-11-27 14:00</div></div><div class="kv"><div class="k">关键词</div><div class="v">数字化保护/数字艺术展/展厅实施</div></div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>🔍 评估分析</h3>
+    <div class="analysis-block"><div class="ab-title">评估状态</div><div class="ab-body">今日 16:00 评估表未收录本项目（V2.0 简报新增），暂无评估分析，待补充研判后更新。</div></div>
+  </div>
+
+  <div class="detail-group">
+    <h3>📊 量化指标</h3>
+    <div class="kv-grid"><div class="kv"><div class="k">资质要求符合性（满分 1.0）</div><div class="v">—</div></div><div class="kv"><div class="k">商务得分 · 客观分说明</div><div class="v">—</div></div><div class="kv"><div class="k">技术得分（主观项·不显示）</div><div class="v">—</div></div><div class="kv"><div class="k">报价得分（价格分不列示）</div><div class="v">—</div></div><div class="kv"><div class="k">预估总得分</div><div class="v">—</div></div><div class="kv"><div class="k">成本预估总额（万元）</div><div class="v">—</div></div><div class="kv"><div class="k">预期毛利率（%）</div><div class="v">—</div></div></div>
+    <div style="margin-top:12px; font-size:.8rem; color:var(--muted);">说明：评分办法未公示项与主观项统一显示「—」，未编造任何数字。</div>
+  </div>
+
+  <div class="detail-group">
+    <h3>⚠️ 结论与风险</h3>
+    <div class="dfeas"><div class="df-b"><b>核心风险点：</b>—（评估表未收录，待补充研判）</div></div>
+    <div class="kv-grid">
+      <div class="kv wide"><div class="k">最终评估结果（待分析）</div><div class="v"><span class="badge" style="background:#64748b;">待分析</span></div></div>
+      <div class="kv wide"><div class="k">决策理由</div><div class="v">今日 16:00 评估表未收录本项目，待补充研判（未编造结论）。</div></div>
+      <div class="kv wide"><div class="k">备注</div><div class="v">—</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:20px 0;">
+    <button class="back-btn" onclick="backToList()">← 返回列表</button>
+  </div>
+</div>
+</div>
+
+</div>
+<script>
+function showDetail(id){
+  document.getElementById('main-view').style.display='none';
+  document.getElementById('detail-view').style.display='block';
+  document.querySelectorAll('.detail-page').forEach(function(p){ p.style.display='none'; });
+  document.getElementById('dp-'+id).style.display='block';
+  window.scrollTo(0,0);
+}
+function backToList(){
+  document.getElementById('detail-view').style.display='none';
+  document.getElementById('main-view').style.display='block';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
